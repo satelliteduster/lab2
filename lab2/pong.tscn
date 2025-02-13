@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://mud0utp6mkip"]
+
+[node name="pong" type="Node2D"]
+
+[node name="paddle" type="Area2D" parent="."]
+
+[node name="ball" type="Area2D" parent="."]
+
+[node name="bluescreen" type="ColorRect" parent="."]
+offset_right = 1151.0
+offset_bottom = 645.0
+color = Color(0, 0, 1, 1)
