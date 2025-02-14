@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cexw772ljxk8t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gaky2"]
+size = Vector2(1152, 37.25)
+
+[node name="scorezone" type="Area2D"]
+position = Vector2(566, 56)
+
+[node name="ceiling" type="CollisionShape2D" parent="."]
+position = Vector2(10, -74.625)
+shape = SubResource("RectangleShape2D_gaky2")

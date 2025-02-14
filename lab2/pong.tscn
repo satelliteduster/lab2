@@ -1,12 +1,64 @@
-[gd_scene format=3 uid="uid://mud0utp6mkip"]
+[gd_scene load_steps=9 format=3 uid="uid://mud0utp6mkip"]
+
+[ext_resource type="PackedScene" uid="uid://cohehnddipr85" path="res://paddle.tscn" id="1_0a862"]
+[ext_resource type="Script" path="res://bluepaddle.gd" id="2_5ipg1"]
+[ext_resource type="PackedScene" uid="uid://ri7ftd60hyem" path="res://ball.tscn" id="2_057vl"]
+[ext_resource type="Script" path="res://blueball.gd" id="4_gq4fy"]
+[ext_resource type="Script" path="res://scorezone.gd" id="5_qp30t"]
+[ext_resource type="PackedScene" uid="uid://cexw772ljxk8t" path="res://scorezone.tscn" id="5_xr51q"]
+[ext_resource type="PackedScene" uid="uid://be827o2ctjqww" path="res://score.tscn" id="7_f35eu"]
+[ext_resource type="Script" path="res://losezone.gd" id="8_gaqnl"]
 
 [node name="pong" type="Node2D"]
 
-[node name="paddle" type="Area2D" parent="."]
+[node name="paddle" parent="." instance=ExtResource("1_0a862")]
+position = Vector2(576, 606)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_5ipg1")
 
-[node name="ball" type="Area2D" parent="."]
+[node name="ball" parent="." instance=ExtResource("2_057vl")]
+position = Vector2(576, 324)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_gq4fy")
+
+[node name="scorezone" parent="." instance=ExtResource("5_xr51q")]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("5_qp30t")
+
+[node name="losezone" parent="scorezone" instance=ExtResource("5_xr51q")]
+position = Vector2(0, 687)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("8_gaqnl")
+
+[node name="Label" parent="scorezone" instance=ExtResource("7_f35eu")]
+layout_direction = 2
+offset_left = 486.0
+offset_top = -56.0
+offset_right = 586.0
+offset_bottom = 44.0
+vertical_alignment = 1
 
 [node name="bluescreen" type="ColorRect" parent="."]
-offset_right = 1151.0
-offset_bottom = 645.0
+z_index = -2
+offset_right = 1152.0
+offset_bottom = 648.0
 color = Color(0, 0, 1, 1)
+
+[node name="border" type="ColorRect" parent="bluescreen"]
+visible = false
+z_index = -1
+custom_minimum_size = Vector2(1232, 722)
+layout_mode = 0
+offset_left = -40.0
+offset_top = -37.0
+offset_right = 1192.0
+offset_bottom = 685.0
+color = Color(0, 0, 0.870588, 1)
+
+[connection signal="area_entered" from="ball" to="ball" method="_on_area_entered"]
+[connection signal="area_entered" from="scorezone" to="scorezone" method="_on_area_entered"]
+[connection signal="area_entered" from="scorezone/losezone" to="scorezone/losezone" method="_on_area_entered"]
